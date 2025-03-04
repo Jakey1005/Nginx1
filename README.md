@@ -17,10 +17,10 @@ SELECT usename, passwd FROM pg_shadow WHERE usename = 'sammy';
 \l
 \q
 
-sudo nano /etc/postgresql/15/main/postgresql.conf
+sudo nano /etc/postgresql/17/main/postgresql.conf
 listen_addresses = '*'
 
-nano /etc/postgresql/16/main/pg_hba.conf
+nano /etc/postgresql/17/main/pg_hba.conf
 host flask_db sammy 172.16.10.10/24 scram-sha-256
 sudo systemctl restart postgresql
 ```
