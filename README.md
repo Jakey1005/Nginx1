@@ -26,11 +26,9 @@ sudo systemctl restart postgresql
 ```
 ## web
 ```
-apt install nginx
-
-```
-```
 apt update
+apt install nginx
+apt install python3-pip
 pip install Flask psycopg2-binary
 ```
 If get externally managed environment error, do the folllowing
