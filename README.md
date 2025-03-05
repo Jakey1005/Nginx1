@@ -12,6 +12,7 @@ CREATE USER sammy WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON DATABASE flask_db TO sammy;
 ALTER USER sammy WITH ENCRYPTED PASSWORD 'password';
 ALTER SYSTEM SET password_encryption = 'scram-sha-256';
+ALTER DATABASE flask_db OWNER TO sammy;
 SELECT pg_reload_conf();
 SELECT usename, passwd FROM pg_shadow WHERE usename = 'sammy';
 \l
