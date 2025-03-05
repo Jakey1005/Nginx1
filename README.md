@@ -200,6 +200,11 @@ flask run
 ```
 SSL cert
 ```
+sudo apt install certbot
+sudo apt install certbot python3-certbot-nginx
+sudo certbot --nginx --server http://
+```
+```
 nano /etc/nginx/sites-available/default
 server {
     listen 80;
