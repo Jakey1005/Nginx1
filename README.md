@@ -194,5 +194,6 @@ server {
 ```
 export FLASK_APP=app
 export FLASK_ENV=development
+cd flask_app
 flask run
 ```
