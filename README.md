@@ -98,7 +98,7 @@ export DB_PASSWORD="password"
 python3 flask_app/init_db.py
 ```
 ```
-nano ~/flask_app/app.py
+nano flask_app/app.py
 import os
 import psycopg2
 from flask import Flask, render_template
@@ -124,8 +124,8 @@ def index():
     return render_template('index.html', books=books)
 ```
 ```
-mkdir templates
-nano templates/base.html
+mkdir flask_app/templates
+nano flask_app/templates/base.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -165,22 +165,7 @@ nano templates/base.html
 </html>
 ```
 ```
-nano templates/index.html
-{% extends 'base.html' %}
-
-{% block content %}
-    <h1>{% block title %} Books {% endblock %}</h1>
-    {% for book in books %}
-        <div class='book'>
-            <h3>#{{ book[0] }} - {{ book[1] }} BY {{ book[2] }}</h3>
-            <i><p>({{ book[3] }} pages)</p></i>
-            <p class='review'>{{ book[4] }}</p>
-            <i><p>Added {{ book[5] }}</p></i>
-        </div>
-    {% endfor %}
-{% endblock %}
-```
-```
+nano flask_app/templates/index.html
 {% extends 'base.html' %}
 
 {% block content %}
@@ -205,4 +190,9 @@ server {
     proxy_pass http://127.0.0.1:5000;
   }
 }
+```
+```
+export FLASK_APP=app
+export FLASK_ENV=development
+flask run
 ```
