@@ -202,7 +202,7 @@ SSL cert
 ```
 sudo apt install certbot
 sudo apt install certbot python3-certbot-nginx
-sudo certbot --nginx --server http://
+sudo certbot --nginx --server https://ca.ncaecybergames.org/acme/acme/directory
 ```
 ```
 nano /etc/nginx/sites-available/default
