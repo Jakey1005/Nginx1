@@ -33,15 +33,15 @@ pip install Flask psycopg2-binary
 ```
 If get externally managed environment error, do the folllowing
 ```
-sudo apt install python3 python3-pip -y
-pip install Flask
 sudo apt install python3-venv -y
 python3 -m venv my_flask_env
 source my_flask_env/bin/activate
+pip install Flask
 pip install Flask psycopg2-binary
 ```
 ```
-nano ~/flask_app/init_db.py
+mkdir flask_app
+nano flask_app/init_db.py
 ```
 ```
 import os
