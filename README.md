@@ -225,3 +225,8 @@ server {
         proxy_pass http://127.0.0.1:5000;
     }
 }
+```
+```
+crontabs -e
+*/5 * * * * certbot renew --quiet --no-random-sleep-on-renew && systemctl reload nginx
+```
