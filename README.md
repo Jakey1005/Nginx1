@@ -198,3 +198,25 @@ export FLASK_ENV=development
 cd flask_app
 flask run
 ```
+SSL cert
+```
+nano /etc/nginx/sites-available/default
+server {
+    listen 80;
+    listen [::]:80 default_server;
+    server_name yourdomain.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 default_server;
+    server_name yourdomain.com;
+
+    ssl_certificate /etc/ssl/certs/your_cert.pem;
+    ssl_certificate_key /etc/ssl/private/your_cert.key;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+    }
+}
