@@ -94,7 +94,7 @@ creates database
 ```
 export DB_USERNAME="sammy"
 export DB_PASSWORD="password"
-python3 init_db.py
+python3 flask_app/init_db.py
 ```
 ```
 nano ~/flask_app/app.py
