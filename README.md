@@ -207,20 +207,17 @@ sudo certbot --nginx --server https://ca.ncaecybergames.org/acme/acme/directory
 ```
 nano /etc/nginx/sites-available/default
 server {
-    listen 80;
-    listen [::]:80 default_server;
-    server_name yourdomain.com;
-    return 301 https://$host$request_uri;
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        server_name www.team5.ncaecybergames.org;
+        return 301 https://$host$request_uri;
 }
-
 server {
     listen 443 ssl;
     listen [::]:443 default_server;
-    server_name yourdomain.com;
-
-    ssl_certificate /etc/ssl/certs/your_cert.pem;
-    ssl_certificate_key /etc/ssl/private/your_cert.key;
-
+    server_name www.team5.ncaecybergames.org;
+    ssl_certificate /etc/nginx/ssl/selfsigned.crt;
+    ssl_certificate_key /etc/nginx/ssl/selfsigned.key;
     location / {
         proxy_pass http://127.0.0.1:5000;
     }
