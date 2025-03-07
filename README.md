@@ -198,7 +198,7 @@ export FLASK_ENV=development
 cd flask_app
 flask run
 ```
-SSL cert
+## SSL cert
 ```
 sudo apt install certbot
 sudo apt install certbot python3-certbot-nginx
@@ -229,4 +229,69 @@ server {
 ```
 crontabs -e
 */5 * * * * certbot renew --quiet --no-random-sleep-on-renew && systemctl reload nginx
+```
+## User input
+```
+nano flask_app/app.py
+from flask import Flask, render_template, request, url_for, redirect
+
+@app.route('/create/', methods=('GET', 'POST'))
+def create():
+    if request.method == 'POST':
+        title = request.form['title']
+        author = request.form['author']
+        pages_num = int(request.form['pages_num'])
+        review = request.form['review']
+
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute('INSERT INTO books (title, author, pages_num, review)'
+                    'VALUES (%s, %s, %s, %s)',
+                    (title, author, pages_num, review))
+        conn.commit()
+        cur.close()
+        conn.close()
+        return redirect(url_for('index'))
+
+    return render_template('create.html')
+```
+```
+nano flask_app/templates/create.html
+{% block content %}
+    <h1>{% block title %} Add a New Book {% endblock %}</h1>
+    <form method="post">
+        <p>
+            <label for="title">Title</label>
+            <input type="text" name="title"
+                   placeholder="Book title">
+            </input>
+        </p>
+
+        <p>
+            <label for="author">Author</label>
+            <input type="text" name="author"
+                   placeholder="Book author">
+            </input>
+        </p>
+
+        <p>
+            <label for="pages_num">Number of pages</label>
+            <input type="number" name="pages_num"
+                   placeholder="Number of pages">
+            </input>
+        </p>
+        <p>
+        <label for="review">Review</label>
+        <br>
+        <textarea name="review"
+                  placeholder="Review"
+                  rows="15"
+                  cols="60"
+                  ></textarea>
+        </p>
+        <p>
+            <button type="submit">Submit</button>
+        </p>
+    </form>
+{% endblock %}
 ```
